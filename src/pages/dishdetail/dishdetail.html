@@ -36,7 +36,7 @@
   <ion-list>
     <ion-item-group>
       <ion-item-divider color="light">Comments</ion-item-divider>
-      <ion-item *ngFor="let comment of comments">  
+      <ion-item *ngFor="let comment of comments" text-wrap>  
         <h4>{{comment.comment}}</h4>
         <p>{{comment.rating}} Stars</p>
         <p><span>--</span> by {{comment.author}} {{comment.date | date}}</p>
