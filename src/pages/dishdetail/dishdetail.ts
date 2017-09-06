@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Dish } from '../../shared/dish';
 import { Comment } from '../../shared/comment';
@@ -21,7 +21,8 @@ export class DishdetailPage implements OnInit {
   comments: Comment[]
 
   constructor(public navCtrl: NavController, 
-    public navParams: NavParams
+    public navParams: NavParams,
+    @Inject('BaseURL') private BaseURL
   ) {}
 
   ionViewDidLoad() {
