@@ -43,4 +43,13 @@
       </ion-item>
     </ion-item-group>
   </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab mini (click)="ToggleFavorites()" *ngIf="favorite" color="primary">
+      <ion-icon name="heart"></ion-icon>
+    </button>
+    <button ion-fab mini (click)="ToggleFavorites()" [hidden]="favorite" color="primary-light">
+      <ion-icon name="heart-outline"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
