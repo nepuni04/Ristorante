@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 /**
  * Generated class for the ReservationPage page.
  *
@@ -14,8 +14,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'reservation.html',
 })
 export class ReservationPage {
+  reservation: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private fb: FormBuilder, 
+    private viewCtrl: ViewController
+  ) {
+    this.createForm();
   }
 
   ionViewDidLoad() {
@@ -23,7 +29,20 @@ export class ReservationPage {
   }
 
   dismiss() {
-    this.navCtrl.pop();
+    this.viewCtrl.dismiss();
   }
 
+  createForm() {
+    let myDate: string = new Date().toISOString();
+    this.reservation = this.fb.group({
+      guests: 3,
+      smoking: false,
+      dateTime: [myDate, Validators.required]
+    })
+  }
+
+  onSubmit() {
+    console.log("Reservation details ", this.reservation.value);
+    this.viewCtrl.dismiss();
+  }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, ModalController } from 'ionic-angular';
 import { Dish } from '../../shared/dish';
 import { Comment } from '../../shared/comment';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
+import { CommentPage } from '../../pages/comment/comment';
 
 /**
  * Generated class for the DishdetailPage page.
@@ -26,7 +27,9 @@ export class DishdetailPage implements OnInit {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     @Inject('BaseURL') private BaseURL,
-    private favoriteProvider: FavoriteProvider
+    private favoriteProvider: FavoriteProvider,
+    private actionSheetCtrl: ActionSheetController,
+    private modalCtrl: ModalController
   ) {}
 
   ionViewDidLoad() {
@@ -49,4 +52,41 @@ export class DishdetailPage implements OnInit {
     this.favorite = this.favoriteProvider.isFavorite(this.dish.id);
   }
 
+  addToFavorites(id: number) {
+    this.favoriteProvider.addFavorite(id);
+    this.favorite = this.favoriteProvider.isFavorite(this.dish.id);
+  }
+
+  openActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: "",
+      buttons: [
+        {
+          text: "Add to Favorites",
+          handler: () => {
+            this.addToFavorites(this.dish.id);
+          }
+        },
+        {
+          text: "Add a Comment",
+          handler: () => {
+            let commentModal = this.modalCtrl.create(CommentPage);
+            commentModal.present();
+            commentModal.onDidDismiss(data => {
+              console.log(data);
+              this.dish.comments.push(data);
+            });
+          }
+        },
+        {
+          text: "Cancel",
+          role: 'cancel',
+          handler: () => {
+            console.log("Action sheet closed");
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 }
