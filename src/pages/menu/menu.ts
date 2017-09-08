@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { Dish } from '../../shared/dish';
 import { DishProvider } from '../../providers/dish/dish';
 import { DishdetailPage } from '../dishdetail/dishdetail';
@@ -24,7 +24,9 @@ export class MenuPage {
     public navParams: NavParams, 
     private dishProvider: DishProvider,
     private favoriteProvider: FavoriteProvider,
-    @Inject('BaseURL') private BaseURL
+    @Inject('BaseURL') private BaseURL,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController
   ) {}
 
   ionViewDidLoad() {
@@ -32,8 +34,12 @@ export class MenuPage {
   }
 
   ngOnInit() {
-    this.dishProvider.getDishes().subscribe(dishes => this.dishes = dishes,
-      errmsg => this.dishErrMess = <any> errmsg);
+    let loading = this.loadingCtrl.create({
+      content: "Loading . . . Please wait"
+    });
+    loading.present();
+    this.dishProvider.getDishes().subscribe(dishes => { loading.dismiss(), this.dishes = dishes },
+      errmsg => { loading.dismiss(), this.dishErrMess = <any> errmsg });
   }
 
   dishSelected(dish: Dish) {
@@ -44,5 +50,10 @@ export class MenuPage {
 
   addToFavorite(dish: Dish) {
     this.favoriteProvider.addFavorite(dish.id);
+    this.toastCtrl.create({
+      message: "Dish"+ dish.id + " successfully added to favorites",
+      duration: 2000,
+      position: 'bottom'
+    }).present();
   }
 }

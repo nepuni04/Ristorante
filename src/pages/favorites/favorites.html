@@ -32,10 +32,10 @@
     </ion-item-sliding>
     
   </ion-list>
-  <div [hidden]="favorites || errMess">
+  <!--<div [hidden]="favorites || errMess">
     <h5>Loading . . . Please wait</h5>
     <ion-spinner></ion-spinner>
-  </div>
+  </div> -->
   <div *ngIf="errMess">
     <h2>Error</h2>
     <h4>{{errMess}}</h4>
