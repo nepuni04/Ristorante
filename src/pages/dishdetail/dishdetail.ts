@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, ModalController } from 'ionic-angular';
 import { Dish } from '../../shared/dish';
 import { Comment } from '../../shared/comment';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
@@ -29,7 +29,8 @@ export class DishdetailPage implements OnInit {
     @Inject('BaseURL') private BaseURL,
     private favoriteProvider: FavoriteProvider,
     private actionSheetCtrl: ActionSheetController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private toastCtrl: ToastController
   ) {}
 
   ionViewDidLoad() {
@@ -65,6 +66,10 @@ export class DishdetailPage implements OnInit {
           text: "Add to Favorites",
           handler: () => {
             this.addToFavorites(this.dish.id);
+            this.toastCtrl.create({
+              message: "Dish" + this.dish.id + " successfully added to favorites",
+              duration: 2000
+            }).present();
           }
         },
         {
@@ -73,8 +78,10 @@ export class DishdetailPage implements OnInit {
             let commentModal = this.modalCtrl.create(CommentPage);
             commentModal.present();
             commentModal.onDidDismiss(data => {
-              console.log(data);
-              this.dish.comments.push(data);
+              if(data) {
+                console.log(data);
+                this.dish.comments.push(data);
+              }
             });
           }
         },
