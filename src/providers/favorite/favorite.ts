@@ -5,6 +5,7 @@ import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { Dish } from '../../shared/dish';
 import { DishProvider } from '../../providers/dish/dish';
+import { Storage } from '@ionic/storage';
 /*
   Generated class for the FavoriteProvider provider.
 
@@ -13,11 +14,16 @@ import { DishProvider } from '../../providers/dish/dish';
 */
 @Injectable()
 export class FavoriteProvider {
-  private favorites: Array<any>;
+  private favorites = [];
 
-  constructor(public http: Http, private dishProvider: DishProvider) {
+  constructor(public http: Http, private dishProvider: DishProvider, private storage: Storage) {
     console.log('Hello FavoriteProvider Provider');
-    this.favorites = [];
+    this.storage.get('favorites').then(favorites => {
+      if(favorites) {
+        this.favorites = favorites;
+        console.log("Favorites list", this.favorites);
+      }
+    });
   }
 
   isFavorite(id: number): boolean {
@@ -33,8 +39,14 @@ export class FavoriteProvider {
     let index = this.favorites.indexOf(id);
     if(index >= 0) {
       this.favorites.splice(index, 1);
+      if(this.favorites.length == 0) {
+        this.storage.remove('favorites');
+      } else {
+        this.storage.set('favorites', this.favorites);
+      }
       return this.getFavorites();
-    } else {
+    } 
+    else {
       console.log('Deleting non-existant favorite', id);
       return Observable.throw('Deleting non-existant favorite' + id);
     }
@@ -44,14 +56,22 @@ export class FavoriteProvider {
     if(this.favorites.some(el => el === id)) {
       let index = this.favorites.indexOf(id)
       this.favorites.splice(index, 1);
-    } else {
+      if(this.favorites.length == 0) {
+        this.storage.remove('favorites');
+      } else {
+        this.storage.set('favorites', this.favorites);
+      }
+    } 
+    else {
       this.favorites.push(id);
+      this.storage.set('favorites', this.favorites);
     }
   }
 
   addFavorite(id: number): boolean {
     if (!this.isFavorite(id)) {
       this.favorites.push(id);
+      this.storage.set('favorites', this.favorites);
     }  
     console.log('favorites', this.favorites);
     return true;
