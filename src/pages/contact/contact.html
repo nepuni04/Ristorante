@@ -31,13 +31,13 @@
     </ion-card-content>
     <ion-row>
       <ion-col>
-        <button ion-button icon-left clear>
+        <button ion-button icon-left clear (click)="dialNumber()">
           <ion-icon name="call"></ion-icon>  
           <div>CALL</div>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button icon-left clear>
+        <button ion-button icon-left clear (click)="sendMail()">
           <ion-icon name="mail"></ion-icon>  
           <div>EMAIL</div>
         </button>

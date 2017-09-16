@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { SocialSharing } from '@ionic-native/social-sharing';
 import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, ModalController } from 'ionic-angular';
 import { Dish } from '../../shared/dish';
 import { Comment } from '../../shared/comment';
@@ -30,7 +31,8 @@ export class DishdetailPage implements OnInit {
     private favoriteProvider: FavoriteProvider,
     private actionSheetCtrl: ActionSheetController,
     private modalCtrl: ModalController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private socialSharing: SocialSharing
   ) {}
 
   ionViewDidLoad() {
@@ -83,6 +85,22 @@ export class DishdetailPage implements OnInit {
                 this.dish.comments.push(data);
               }
             });
+          }
+        },
+        {
+          text: 'Share via Facebook',
+          handler: () => {
+            this.socialSharing.shareViaFacebook(this.dish.name + ' -- ' + this.dish.description, this.BaseURL + this.dish.image, '')
+              .then(() => console.log('Posted successfully to Facebook'))
+              .catch(() => console.log('Failed to post to Facebook'));
+          }
+        },
+        {
+          text: 'Share via Twitter',
+          handler: () => {
+            this.socialSharing.shareViaTwitter(this.dish.name + ' -- ' + this.dish.description, this.BaseURL + this.dish.image, '')
+              .then(() => console.log('Posted successfully to Twitter'))
+              .catch(() => console.log('Failed to post to Twitter'));
           }
         },
         {
