@@ -4,13 +4,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Network } from '@ionic-native/network';
 
-import { HomePage } from '../pages/home/home';
+/*import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { MenuPage } from '../pages/menu/menu';
 import { ContactPage } from '../pages/contact/contact';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { ReservationPage } from '../pages/reservation/reservation';
-import { LoginPage } from '../pages/login/login';
+import { LoginPage } from '../pages/login/login';*/
 
 @Component({
   templateUrl: 'app.html'
@@ -18,9 +18,9 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   loading: any = null;
-  rootPage: any = HomePage;
+  rootPage: any = 'HomePage';
 
-  pages: Array<{title: string, icon: string, component: any}>;
+  pages: Array<{title: string, icon: string, component: string}>;
 
   constructor(public platform: Platform, 
     public statusBar: StatusBar, 
@@ -33,11 +33,11 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', icon: 'home', component: HomePage },
-      { title: 'About Us', icon: 'information-circle', component: AboutPage },
-      { title: 'Menu', icon: 'list-box', component: MenuPage },
-      { title: 'Contact Us', icon: 'contact', component: ContactPage },
-      { title: 'My Favorites', icon: 'heart', component: FavoritesPage }
+      { title: 'Home', icon: 'home', component: 'HomePage' },
+      { title: 'About Us', icon: 'information-circle', component: 'AboutPage' },
+      { title: 'Menu', icon: 'list-box', component: 'MenuPage' },
+      { title: 'Contact Us', icon: 'contact', component: 'ContactPage' },
+      { title: 'My Favorites', icon: 'heart', component: 'FavoritesPage' }
     ];
 
   }
@@ -78,10 +78,10 @@ export class MyApp {
   }
 
   openReserve() {
-    this.modalCtrl.create(ReservationPage).present();
+    this.modalCtrl.create('ReservationPage').present();
   }
 
   openLogin() {
-    this.modalCtrl.create(LoginPage).present();
+    this.modalCtrl.create('LoginPage').present();
   }
 }

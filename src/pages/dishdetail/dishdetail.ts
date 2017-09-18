@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams, ActionSheetController, ToastContro
 import { Dish } from '../../shared/dish';
 import { Comment } from '../../shared/comment';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
-import { CommentPage } from '../../pages/comment/comment';
+/*import { CommentPage } from '../../pages/comment/comment';*/
 
 /**
  * Generated class for the DishdetailPage page.
@@ -77,7 +77,7 @@ export class DishdetailPage implements OnInit {
         {
           text: "Add a Comment",
           handler: () => {
-            let commentModal = this.modalCtrl.create(CommentPage);
+            let commentModal = this.modalCtrl.create('CommentPage');
             commentModal.present();
             commentModal.onDidDismiss(data => {
               if(data) {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, IonicPage } from 'ionic-angular';
 
 import { DishProvider } from '../../providers/dish/dish';
 import { LeaderProvider } from '../../providers/leader/leader';
@@ -8,6 +8,7 @@ import { Dish } from '../../shared/dish';
 import { Leader } from '../../shared/leader';
 import { Promotion } from '../../shared/promotion';
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

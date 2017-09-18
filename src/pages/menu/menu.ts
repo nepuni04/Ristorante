@@ -2,8 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { Dish } from '../../shared/dish';
 import { DishProvider } from '../../providers/dish/dish';
-import { DishdetailPage } from '../dishdetail/dishdetail';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
+/*import { DishdetailPage } from '../dishdetail/dishdetail';*/
+
 /**
  * Generated class for the MenuPage page.
  *
@@ -43,7 +44,7 @@ export class MenuPage {
   }
 
   dishSelected(dish: Dish) {
-    this.navCtrl.push(DishdetailPage, {
+    this.navCtrl.push('DishdetailPage', {
       dish: dish
     })
   }

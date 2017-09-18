@@ -10,11 +10,15 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { Network } from '@ionic-native/network';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+/*import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { MenuPage } from '../pages/menu/menu';
 import { ContactPage } from '../pages/contact/contact';
 import { DishdetailPage } from '../pages/dishdetail/dishdetail';
+import { FavoritesPage } from '../pages/favorites/favorites';
+import { ReservationPage } from '../pages/reservation/reservation';
+import { CommentPage } from '../pages/comment/comment';
+import { LoginPage } from '../pages/login/login';*/
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,15 +28,11 @@ import { PromotionProvider } from '../providers/promotion/promotion';
 import { ProcessHttpmsgProvider } from '../providers/process-http-msg/process-http-msg';
 import { baseURL } from '../shared/baseurl';
 import { FavoriteProvider } from '../providers/favorite/favorite';
-import { FavoritesPage } from '../pages/favorites/favorites';
-import { ReservationPage } from '../pages/reservation/reservation';
-import { CommentPage } from '../pages/comment/comment';
-import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    /*HomePage,
     AboutPage,
     MenuPage,
     ContactPage,
@@ -40,7 +40,7 @@ import { LoginPage } from '../pages/login/login';
     FavoritesPage,
     ReservationPage,
     CommentPage,
-    LoginPage
+    LoginPage*/
   ],
   imports: [
     BrowserModule,
@@ -51,7 +51,7 @@ import { LoginPage } from '../pages/login/login';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    /*HomePage,
     AboutPage,
     MenuPage,
     ContactPage,
@@ -59,7 +59,7 @@ import { LoginPage } from '../pages/login/login';
     FavoritesPage,
     ReservationPage,
     CommentPage,
-    LoginPage
+    LoginPage*/
   ],
   providers: [
     StatusBar,
