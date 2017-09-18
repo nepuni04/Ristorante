@@ -8,6 +8,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
 import { CallNumber } from '@ionic-native/call-number';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Network } from '@ionic-native/network';
+import { Camera } from '@ionic-native/camera'; 
 
 import { MyApp } from './app.component';
 /*import { HomePage } from '../pages/home/home';
@@ -75,7 +76,8 @@ import { FavoriteProvider } from '../providers/favorite/favorite';
     EmailComposer,
     CallNumber,
     SocialSharing,
-    Network
+    Network, 
+    Camera
   ]
 })
 export class AppModule {}
